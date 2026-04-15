@@ -1,0 +1,87 @@
+.navbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 40px;
+    border-bottom: 1px solid #e5e5e5;
+    background: white;
+    position: sticky;
+    top: 0;
+    z-index: 50;
+}
+
+.logo {
+    font-size: 20px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-decoration: none;
+    color: black;
+}
+
+.nav-links,
+.nav-right {
+    display: flex;
+    gap: 40px;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.nav-links a,
+.nav-right a {
+    position: relative;
+    text-decoration: none;
+    color: black;
+    padding-bottom: 4px;
+}
+
+.nav-links a::after,
+.nav-right a::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    height: 2px;
+    width: 0%;
+    background: black;
+    transition: width 0.25s ease;
+}
+
+.nav-links a:hover::after,
+.nav-right a:hover::after {
+    width: 100%;
+}
+
+/* Dropdown */
+.dropdown {
+    position: relative;
+}
+
+.dropdown-menu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background: white;
+    border: 1px solid #e5e5e5;
+    list-style: none;
+    padding: 8px 0;
+    min-width: 180px;
+    z-index: 100;
+}
+
+.dropdown:hover .dropdown-menu {
+    display: block;
+}
+
+.dropdown-menu li a {
+    display: block;
+    padding: 10px 20px;
+    font-size: 13px;
+    text-decoration: none;
+    color: black;
+    font-weight: 400;
+}
+
+.dropdown-menu li a:hover {
+    background: #f5f3ef;
+}

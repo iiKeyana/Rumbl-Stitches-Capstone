@@ -1,0 +1,152 @@
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500&display=swap');
+
+.home {
+    --black: #0a0a0a;
+    --white: #f5f3ef;
+    --muted: #888;
+    --border: #e2e0db;
+    font-family: 'DM Sans', sans-serif;
+    background: var(--white);
+    color: var(--black);
+}
+
+.head {
+    padding: 80px 60px;
+    border-bottom: 1px solid var(--border);
+}
+
+.head-eyebrow {
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 16px;
+}
+
+.head-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(64px, 10vw, 120px);
+    line-height: 1;
+    margin: 0 0 20px;
+}
+
+.head-sub {
+    font-size: 15px;
+    color: var(--muted);
+    font-weight: 300;
+    margin: 0 0 36px;
+}
+
+.head-cta {
+    display: flex;
+    gap: 12px;
+}
+
+
+.btn {
+    padding: 12px 24px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    text-decoration: none;
+    border: 2px solid var(--black);
+    transition: background 0.2s, color 0.2s;
+}
+
+.btn-primary {
+    background: var(--black);
+    color: var(--white);
+}
+
+.btn-ghost {
+    background: transparent;
+    color: var(--black);
+}
+
+.btn-ghost:hover { background: var(--black); color: var(--white); }
+.btn-primary:hover { background: #333; }
+
+
+.collections-section {
+    padding: 64px 60px;
+}
+
+.collections-header {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    margin-bottom: 32px;
+}
+
+.section-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 36px;
+    letter-spacing: 0.04em;
+    margin: 0;
+}
+
+.view-all {
+    font-size: 13px;
+    color: var(--muted);
+    text-decoration: none;
+}
+
+.view-all:hover { color: var(--black); }
+
+
+.collections-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+}
+
+.collection-card {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    padding: 32px 28px;
+    border: 1px solid var(--border);
+    text-decoration: none;
+    color: inherit;
+    transition: border-color 0.2s;
+}
+
+.collection-card:hover {
+    border-color: var(--black);
+}
+
+.card-label {
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--muted);
+}
+
+.card-name {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 32px;
+    letter-spacing: 0.02em;
+    margin: 4px 0;
+}
+
+.card-tagline {
+    font-size: 13px;
+    color: var(--muted);
+    font-weight: 300;
+    margin: 0 0 16px;
+}
+
+.card-cta {
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--black);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .hero { padding: 48px 24px; }
+    .collections-section { padding: 48px 24px; }
+    .collections-grid { grid-template-columns: 1fr; }
+}
