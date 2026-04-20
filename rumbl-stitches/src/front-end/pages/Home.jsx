@@ -21,8 +21,9 @@ export default function Home() {
         <div className="home">
 
             <section className="head">
-                <h1 className="head-title">Wear the Anime.</h1>
-                <p className="head-sub">Anime-inspired streetwear.</p>
+                <h1 className="head-title">Rumbl Stitches</h1>
+                <p className="head-sub">Every Rumble Ball unlocks a new form. Every stitch unlocks a new you.</p>
+                <p className="head-sub">Born from the Grand Line, stitched for the streets. This is your transformation.</p>
 
                 <div className="head-cta">
                     <Link to="/collections" className="btn btn-primary">Shop Collections</Link>

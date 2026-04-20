@@ -19,14 +19,14 @@ const filters = {
 
 export default function Products() {
     return (
-        <div className="products-page">
+        <div className="prods-page">
 
-            <div className="products-header">
-                <h1 className="products-title">Products</h1>
+            <div className="prods-header">
+                <h1 className="prods-title">Products</h1>
 
             </div>
 
-            <div className="products-body">
+            <div className="prods-body">
 
                 <aside className="sidebar">
                     {Object.entries(filters).map(([group, options]) => (
@@ -49,17 +49,17 @@ export default function Products() {
                     ))}
                 </aside>
 
-                <main className="products-grid-area">
-                    <div className="products-grid">
+                <main className="prods-grid-area">
+                    <div className="prods-grid">
                         {products.map((p) => (
-                            <Link key={p.id} to={`/products/${p.id}`} className="product-card">
-                                <div className="product-image">
+                            <Link key={p.id} to={`/products/${p.id}`} className="prods-card">
+                                <div className="prods-image">
                                     <span className="image-label">Image</span>
                                     
                                 </div>
-                                <div className="product-info">
-                                    <span className="product-name">{p.name}</span>
-                                    <span className="product-price">{p.price}</span>
+                                <div className="prods-info">
+                                    <span className="prods-name">{p.name}</span>
+                                    <span className="prods-price">{p.price}</span>
                                 
                                 </div>
                             </Link>

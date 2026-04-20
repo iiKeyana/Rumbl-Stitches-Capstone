@@ -1,9 +1,9 @@
-.products-header {
+.prods-header {
     padding: 40px 40px 24px;
     border-bottom: 1px solid #e2e0db;
 }
 
-.products-title {
+.prods-title {
     font-family: 'Bebas Neue', sans-serif;
     font-size: clamp(48px, 7vw, 80px);
     line-height: 1;
@@ -12,7 +12,7 @@
     color: #0a0a0a;
 }
 
-.products-body {
+.prods-body {
     display: flex;
 }
 
@@ -60,12 +60,12 @@
     cursor: pointer;
 }
 
-.products-grid-area {
+.prods-grid-area {
     flex: 1;
     padding: 28px 32px;
 }
 
-.products-grid {
+.prods-grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: 12px;
