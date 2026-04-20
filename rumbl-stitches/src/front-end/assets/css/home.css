@@ -144,7 +144,6 @@
     color: var(--black);
 }
 
-/* Responsive */
 @media (max-width: 768px) {
     .hero { padding: 48px 24px; }
     .collections-section { padding: 48px 24px; }

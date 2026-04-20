@@ -13,7 +13,7 @@ export default function Collection() {
                     <p>Streetwear inspired by the Grand Line</p>
                 </Link>
 
-                <Link to="/collections/jjk" className="collection-card">
+                <Link to="/collections/jujutsu-kaisen" className="collection-card">
                     <h2>Jujutsu Kaisen</h2>
                     <p>Cursed energy, elevated style</p>
                 </Link>

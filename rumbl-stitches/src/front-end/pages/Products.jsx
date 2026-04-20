@@ -23,6 +23,7 @@ export default function Products() {
 
             <div className="products-header">
                 <h1 className="products-title">Products</h1>
+
             </div>
 
             <div className="products-body">
@@ -31,6 +32,7 @@ export default function Products() {
                     {Object.entries(filters).map(([group, options]) => (
                         <div key={group} className="filter-group">
                             <h3 className="sidebar-title">{group}</h3>
+
                             <ul className="filter-list">
                                 {options.map((f) => (
                                     <li key={f}>
@@ -38,8 +40,10 @@ export default function Products() {
                                             <input type="checkbox" defaultChecked={f === "All"} />
                                             {f}
                                         </label>
+
                                     </li>
                                 ))}
+
                             </ul>
                         </div>
                     ))}
@@ -51,13 +55,16 @@ export default function Products() {
                             <Link key={p.id} to={`/products/${p.id}`} className="product-card">
                                 <div className="product-image">
                                     <span className="image-label">Image</span>
+                                    
                                 </div>
                                 <div className="product-info">
                                     <span className="product-name">{p.name}</span>
                                     <span className="product-price">{p.price}</span>
+                                
                                 </div>
                             </Link>
                         ))}
+                    
                     </div>
                 </main>
 
