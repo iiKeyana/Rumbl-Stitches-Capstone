@@ -3,7 +3,7 @@ import Layout from "../front-end/pages/Layout";
 
 import Home from "../front-end/pages/Home";
 import Products from "../front-end/pages/Products";
-import SingleProduct from "../front-end/pages/SingleProduct";
+import SingleProduct from "../front-end/pages/SingleProd";
 import Collection from "../front-end/pages/Collection";
 import Cart from "../front-end/pages/Cart";
 import Checkout from "../front-end/pages/Checkout";

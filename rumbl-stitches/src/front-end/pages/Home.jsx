@@ -23,7 +23,7 @@ export default function Home() {
             <section className="head">
                 <h1 className="head-title">Rumbl Stitches</h1>
                 <p className="head-sub">Every Rumble Ball unlocks a new form. Every stitch unlocks a new you.</p>
-                <p className="head-sub">Born from the Grand Line, stitched for the streets. This is your transformation.</p>
+                {/* <p className="head-sub">Born from the Grand Line, stitched for the streets. This is your transformation.</p> */}
 
                 <div className="head-cta">
                     <Link to="/collections" className="btn btn-primary">Shop Collections</Link>
@@ -35,7 +35,7 @@ export default function Home() {
             <section className="collections-section">
                 <div className="collections-header">
                     <h2 className="section-title">Featured Collections</h2>
-                    <Link to="/products" className="view-all">View All →</Link>
+                    <Link to="/products" className="view-all">View All &#8594;</Link>
 
                 </div>
 
@@ -44,7 +44,7 @@ export default function Home() {
                         <Link key={col.id} to={`/collections/${col.id}`} className="collection-card">
                             <span className="card-label">Collection</span>
                             <h3 className="card-name">{col.name}</h3>
-                            <span className="card-cta">Explore →</span>
+                            <span className="card-cta">Explore &#8594;</span>
 
                         </Link>
                     ))}
