@@ -1,16 +1,17 @@
 import { Link } from "react-router-dom";
+import { useState, useEffect } from "react";
 import "../assets/css/products.css";
 
-const products = [
-    { id: 1, name: "Straw Hat Tee", price: "$42", collection: "One Piece" },
-    { id: 2, name: "Grand Line Hoodie", price: "$78", collection: "One Piece" },
-    { id: 3, name: "Wanted Poster Tee", price: "$42", collection: "One Piece" },
-    { id: 4, name: "Cursed Energy Tee", price: "$42", collection: "Jujutsu Kaisen" },
-    { id: 5, name: "Gojo Fit Hoodie", price: "$78", collection: "Jujutsu Kaisen" },
-    { id: 6, name: "Domain Expansion Tee", price: "$42", collection: "Jujutsu Kaisen" },
-    { id: 7, name: "Breathing Form Tee", price: "$42", collection: "Demon Slayer" },
-    { id: 8, name: "Tanjiro Hoodie", price: "$78", collection: "Demon Slayer" },
-];
+// const products = [
+//     { id: 1, name: "Straw Hat Tee", price: "$42", collection: "One Piece" },
+//     { id: 2, name: "Grand Line Hoodie", price: "$78", collection: "One Piece" },
+//     { id: 3, name: "Wanted Poster Tee", price: "$42", collection: "One Piece" },
+//     { id: 4, name: "Cursed Energy Tee", price: "$42", collection: "Jujutsu Kaisen" },
+//     { id: 5, name: "Gojo Fit Hoodie", price: "$78", collection: "Jujutsu Kaisen" },
+//     { id: 6, name: "Domain Expansion Tee", price: "$42", collection: "Jujutsu Kaisen" },
+//     { id: 7, name: "Breathing Form Tee", price: "$42", collection: "Demon Slayer" },
+//     { id: 8, name: "Tanjiro Hoodie", price: "$78", collection: "Demon Slayer" },
+// ];
 
 const filters = {
     Collections: ["All", "One Piece", "Jujutsu Kaisen", "Demon Slayer"],
@@ -18,6 +19,26 @@ const filters = {
 };
 
 export default function Products() {
+    const [products, setProducts] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
+
+    useEffect(() => {
+        fetch("./api/products")
+            .then((res) => res.json())
+            .then((data) => {
+                setProducts(data);
+                setLoading(false);
+
+            })
+            .catch(() => {
+                setError("Failed to load products");
+                setLoading(false);
+
+            });
+
+    }, []);
+
     return (
         <div className="prods-page">
 
@@ -50,22 +71,30 @@ export default function Products() {
                 </aside>
 
                 <main className="prods-grid-area">
-                    <div className="prods-grid">
-                        {products.map((p) => (
-                            <Link key={p.id} to={`/products/${p.id}`} className="prods-card">
-                                <div className="prods-image">
-                                    <span className="image-label">Image</span>
+                    {loading && <p className="prods-status">Loading...</p>}
+                    {error && <p className="prods-status">{error}</p>}
+                    {!loading && !error && (
+
+                        <div className="prods-grid">
+                            {products.map((p) => (
+                                <Link key={p._id} to={`/products/${p._id}`} className="product-card">
+                                    <div className="product-image">
+                                        {p.image
+                                            ? <img src={p.image} alt={p.name} />
+                                            : <span className="image-label">Image</span>
+                                        }
+                                        
+                                    </div>
+                                    <div className="product-info">
+                                        <span className="product-name">{p.name}</span>
+                                        <span className="product-price">${p.price}</span>
                                     
-                                </div>
-                                <div className="prods-info">
-                                    <span className="prods-name">{p.name}</span>
-                                    <span className="prods-price">{p.price}</span>
-                                
-                                </div>
-                            </Link>
-                        ))}
-                    
-                    </div>
+                                    </div>
+                                </Link>
+                            ))}
+                        
+                        </div>
+                    )}
                 </main>
 
             </div>
