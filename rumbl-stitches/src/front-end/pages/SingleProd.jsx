@@ -29,7 +29,30 @@ export default function SingleProduct() {
 
     }, [id]);
 
+    const handleAddToCart = () => {
+        if (!selectedSize) {
+            setSizeError(true);
+            setTimeout(() => setSizeError(false), 2000);
 
+            return;
+        }
+
+        const cart = JSON.parse(localStorage.getItem("cart") || "[]");
+        const existing = cart.find((i) => i._id === product._id && i.size === selectedSize);
+
+        if (existing) {
+            existing.quantity += 1;
+
+        } else {
+            cart.push({ ...product, size: selectedSize, quantity: 1 });
+
+        }
+
+        localStorage.setItem("cart", JSON.stringify(cart));
+
+        setAdded(true);
+        setTimeout(() => setAdded(false), 2000);
+    };
 
     if (loading) return <div className="prod-status">Loading...</div>;
     if (error) return <div className="prod-status">{error}</div>;
@@ -37,8 +60,8 @@ export default function SingleProduct() {
 
     return (
         <div className= "prod-page">
-            <button className="prod-back" onClick={() => navigate(-1)}>
-                ← Back
+            <button className= "prod-back" onClick={() => navigate(-1)}>
+                &#8592; Back
             </button>
 
             <div className= "prod-layout">
@@ -50,15 +73,15 @@ export default function SingleProduct() {
 
                 <div className= "prod-details">
                     {product.collection && (
-                        <p className="prod-collection">{product.collection}</p>
+                        <p className= "prod-collection">{product.collection}</p>
 
                     )}
 
-                    <h1 className= "prod-name">{product.name}</h1>
-                    <p className= "prod-price">${product.price}</p>
+                    <h1 className="prod-name">{product.name}</h1>
+                    <p className="prod-price">${product.price}</p>
 
                     {product.description && (
-                        <p className= "prod-description">{product.description}</p>
+                        <p className="prod-description">{product.description}</p>
 
                     )}
 
@@ -69,21 +92,20 @@ export default function SingleProduct() {
 
                         <div className= "prod-sizes">
                             {(product.sizes || ["S", "M", "L", "XL", "XXL"]).map((size) => (
-                                <button
+                                <button className= {`prod-size-btn ${selectedSize === size ? "active" : ""}`}
                                     key={size}
-                                    className={`prod-size-btn ${selectedSize === size ? "active" : ""}`}
                                     onClick={() => setSelectedSize(size)}
                                 >
                                     {size}
 
                                 </button>
                             ))}
-
+                            
                         </div>
                     </div>
 
-                    <button
-                        className= {`prod-add-btn ${added ? "added" : ""}`}
+                    <button className= {`prod-add-btn ${added ? "added" : ""}`}
+                        onClick= {handleAddToCart}
                     >
                         {added ? "Added to Cart ✓" : "Add to Cart"}
                     </button>

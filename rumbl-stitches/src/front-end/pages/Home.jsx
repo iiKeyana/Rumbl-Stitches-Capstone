@@ -20,31 +20,31 @@ export default function Home() {
     return (
         <div className="home">
 
-            <section className="head">
-                <h1 className="head-title">Rumbl Stitches</h1>
-                <p className="head-sub">Every Rumble Ball unlocks a new form. Every stitch unlocks a new you.</p>
+            <section className= "head">
+                <h1 className= "head-title">Rumbl Stitches</h1>
+                <p className= "head-sub">Every Rumble Ball unlocks a new point. Every stitch unlocks a new you.</p>
                 {/* <p className="head-sub">Born from the Grand Line, stitched for the streets. This is your transformation.</p> */}
 
-                <div className="head-cta">
-                    <Link to="/collections" className="btn btn-primary">Shop Collections</Link>
-                    <Link to="/products" className="btn btn-ghost">All Products</Link>
+                <div className= "head-cta">
+                    <Link to="/collections" className= "btn btn-primary">Shop Collections</Link>
+                    <Link to="/products" className= "btn btn-ghost">All Products</Link>
                 </div>
 
             </section>
 
-            <section className="collections-section">
-                <div className="collections-header">
-                    <h2 className="section-title">Featured Collections</h2>
-                    <Link to="/products" className="view-all">View All &#8594;</Link>
+            <section className= "collections-section">
+                <div className= "collections-header">
+                    <h2 className= "section-title">Featured Collections</h2>
+                    <Link to="/products" className= "view-all">View All &#8594;</Link>
 
                 </div>
 
-                <div className="collections-grid">
+                <div className= "collections-grid">
                     {collections.map((col) => (
-                        <Link key={col.id} to={`/collections/${col.id}`} className="collection-card">
-                            <span className="card-label">Collection</span>
-                            <h3 className="card-name">{col.name}</h3>
-                            <span className="card-cta">Explore &#8594;</span>
+                        <Link key={col.id} to={`/collections/${col.id}`} className= "collection-card">
+                            <span className= "card-label">Collection</span>
+                            <h3 className= "card-name">{col.name}</h3>
+                            <span className= "card-cta">Explore &#8594;</span>
 
                         </Link>
                     ))}

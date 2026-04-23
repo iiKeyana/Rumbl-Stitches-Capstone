@@ -9,7 +9,6 @@
     color: var(--black);
 }
 
-/* Hero */
 .col-hero {
     padding: 64px 60px;
     border-bottom: 1px solid var(--border);
@@ -17,7 +16,6 @@
     overflow: hidden;
 }
 
-/* One Piece specific */
 .op-hero {
     background:
         radial-gradient(ellipse 50% 80% at 90% 50%, rgba(255, 107, 43, 0.08) 0%, transparent 70%),
@@ -70,7 +68,6 @@
     color: #FF6B2B;
 }
 
-/* Products */
 .col-products {
     padding: 48px 60px;
 }
@@ -94,7 +91,6 @@
     color: var(--muted);
 }
 
-/* Grid */
 .col-grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
@@ -146,7 +142,6 @@
     color: var(--muted);
 }
 
-/* Responsive */
 @media (max-width: 900px) {
     .col-hero { padding: 48px 24px; }
     .col-products { padding: 36px 24px; }
