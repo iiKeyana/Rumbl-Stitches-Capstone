@@ -6,6 +6,7 @@ const productSchema = new mongoose.Schema({
     image:       { type: String, default: "" },
     description: { type: String, default: "" },
     collection:  { type: String, default: "" },
+    category:    { type: String, default: "" },
     sizes:       { type: [String], default: ["S", "M", "L", "XL", "XXL"] },
 });
 
