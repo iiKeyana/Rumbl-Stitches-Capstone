@@ -16,7 +16,7 @@ export default function DemonSlayer() {
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        fetch("http://localhost:5000/api/products?collection=Demon Slayer")
+        fetch(`/api/products?collection=${encodeURIComponent("Demon Slayer")}`)
             .then((res) => res.json())
             .then((data) => {
                 setProducts(data);

@@ -16,7 +16,7 @@ export default function JJK() {
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        fetch("http://localhost:5000/api/products?collection=JJK")
+        fetch(`/api/products?collection=${encodeURIComponent("Jujutsu Kaisen")}`)
             .then((res) => res.json())
             .then((data) => {
                 setProducts(data);
