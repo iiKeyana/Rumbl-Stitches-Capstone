@@ -1,8 +1,24 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useState } from "react";
 import "../assets/css/navbar.css";
 import { MdShoppingCart } from "react-icons/md";
+import { FaSearch } from "react-icons/fa";
 
 export default function Navbar() {
+    const [searchOpen, setSearchOpen] = useState(false);
+    const [query, setQuery] = useState("");
+    const navigate = useNavigate();
+
+    const handleSearchSubmit = (e) => {
+        e.preventDefault();
+
+        if (query.trim()) {
+            navigate(`./api/products?search=${encodeURIComponent(query)}`);
+            setQuery("");
+            setSearchOpen(false);
+        }
+    };
+
     return (
         <nav className="navbar">
             <Link to="/" className="logo">
@@ -25,6 +41,25 @@ export default function Navbar() {
             </div>
 
             <div className="nav-right">
+                <div className= {`search-bar ${searchOpen ? "open" : ""}`}>
+                    <form className="search-form" onSubmit={handleSearchSubmit}>
+                        <input
+                            type="text"
+                            className="search-input"
+                            placeholder="Search products..."
+                            value={query}
+                            onChange={(e) => setQuery(e.target.value)}
+                            autoFocus={searchOpen}
+                        />
+
+                    </form>
+
+                    <button className="search-btn" onClick={() => setSearchOpen((open) => !open)}>
+                        <FaSearch />
+                    </button>
+
+                </div>
+
                 <Link to="/cart">
                     <MdShoppingCart />
                 </Link>

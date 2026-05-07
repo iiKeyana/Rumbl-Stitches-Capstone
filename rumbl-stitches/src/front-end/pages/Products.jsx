@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 import "../assets/css/products.css";
+import { useSearchParams } from "react-router-dom";
 
 // const products = [
 //     { id: 1, name: "Straw Hat Tee", price: "$42", collection: "One Piece" },
@@ -24,12 +25,15 @@ export default function Products() {
     const [error, setError] = useState(null);
     const [selectedCollection, setSelectedCollection] = useState("All");
     const [selectedCategories, setSelectedCategories] = useState([]);
+    const [searchParams, setSearchParams] = useSearchParams();
 
     useEffect(() => {
         setLoading(true);
         const params = new URLSearchParams();
+        const search = new URLSearchParams(window.location.search);
         if (selectedCollection !== "All") params.set("collection", selectedCollection);
         if (selectedCategories.length === 1) params.set("category", selectedCategories[0]);
+        if (search.get("search")) params.set("search", search.get("search"));
 
         fetch(`./api/products?${params.toString()}`)
             .then((res) => res.json())

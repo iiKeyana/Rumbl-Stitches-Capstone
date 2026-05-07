@@ -91,3 +91,54 @@
 .dropdown-menu li a:hover {
     background: #f5f3ef;
 }
+
+/* Search */
+.search-bar {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.search-form {
+    overflow: hidden;
+    max-width: 0;
+    transition: max-width 0.3s ease, opacity 0.3s ease;
+    opacity: 0;
+}
+
+.search-bar.open .search-form {
+    max-width: 220px;
+    opacity: 1;
+}
+
+.search-input {
+    border: none;
+    border-bottom: 1.5px solid #0a0a0a;
+    outline: none;
+    font-size: 13px;
+    font-family: 'DM Sans', sans-serif;
+    padding: 4px 0;
+    width: 200px;
+    background: transparent;
+    color: #0a0a0a;
+}
+
+.search-input::placeholder {
+    color: #aaa;
+}
+
+.search-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    color: #0a0a0a;
+    display: flex;
+    align-items: center;
+    padding: 0;
+    transition: opacity 0.2s;
+}
+
+.search-btn:hover {
+    opacity: 0.5;
+}

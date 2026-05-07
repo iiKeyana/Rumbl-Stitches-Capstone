@@ -22,6 +22,10 @@ app.get("/api/products", async (req, res) => {
             filter.category = req.query.category;
         }
 
+        if (req.query.search) {
+            filter.name = { $regex: req.query.search, $options: "i" };
+        }
+
         const products = await Product.find(filter);
         res.json(products);
     } catch (err) {
@@ -34,7 +38,7 @@ app.post("/api/products", async (req, res) => {
     try {
         const product = new Product(req.body);
         await product.save();
-        
+
         res.status(201).json(product);
     } catch (err) {
         res.status(500).json({ error: err.message });
