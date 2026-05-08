@@ -30,10 +30,12 @@ export default function Products() {
     useEffect(() => {
         setLoading(true);
         const params = new URLSearchParams();
-        const search = new URLSearchParams(window.location.search);
+        
         if (selectedCollection !== "All") params.set("collection", selectedCollection);
         if (selectedCategories.length === 1) params.set("category", selectedCategories[0]);
-        if (search.get("search")) params.set("search", search.get("search"));
+
+        const search = searchParams.get("search");
+        if (search) params.set("search", search);
 
         fetch(`./api/products?${params.toString()}`)
             .then((res) => res.json())
@@ -48,7 +50,7 @@ export default function Products() {
 
             });
 
-    }, [selectedCollection, selectedCategories]);
+    }, [selectedCollection, selectedCategories, searchParams]);
 
     const handleCategoryChange = (option) => {
         setSelectedCategories((prev) => prev.includes(option)

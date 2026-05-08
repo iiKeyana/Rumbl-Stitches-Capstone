@@ -23,7 +23,14 @@ app.get("/api/products", async (req, res) => {
         }
 
         if (req.query.search) {
-            filter.name = { $regex: req.query.search, $options: "i" };
+            const regex = { $regex: req.query.search, $options: "i" };
+
+            filter.$or = [
+                { name: regex },
+                { collection: regex },
+                { category: regex }
+            ];
+
         }
 
         const products = await Product.find(filter);

@@ -13,7 +13,7 @@ export default function Navbar() {
         e.preventDefault();
 
         if (query.trim()) {
-            navigate(`./api/products?search=${encodeURIComponent(query)}`);
+            navigate(`/products?search=${encodeURIComponent(query)}`);
             setQuery("");
             setSearchOpen(false);
         }

@@ -92,7 +92,6 @@
     background: #f5f3ef;
 }
 
-/* Search */
 .search-bar {
     display: flex;
     align-items: center;
@@ -128,6 +127,7 @@
 }
 
 .search-btn {
+    position: relative;
     background: none;
     border: none;
     cursor: pointer;
@@ -139,6 +139,18 @@
     transition: opacity 0.2s;
 }
 
-.search-btn:hover {
-    opacity: 0.5;
+.search-btn::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -6px;
+    height: 2px;
+    width: 0%;
+    background: black;
+    transition: width 0.25s ease;
 }
+
+.search-btn:hover::after {
+    width: 125%
+}
+
