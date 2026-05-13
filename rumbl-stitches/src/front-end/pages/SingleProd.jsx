@@ -88,10 +88,10 @@ export default function SingleProduct() {
                     {product.tags && product.tags.length > 0 && (
                         <div className="prod-tags">
                             {product.tags.map((tag) => (
-                                <span key={tag} className="prod-tag">
-                                    {tag}
+                                <span key={tag} className="prod-tag" onClick={() => navigate(`/products?search=${encodeURIComponent(tag)}`)}>
+                                    #{tag}
                                 </span>
-                                
+
                             ))}
                         </div>
                     )}

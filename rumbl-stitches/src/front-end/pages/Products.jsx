@@ -1,7 +1,8 @@
 import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 import "../assets/css/products.css";
-import { useSearchParams } from "react-router-dom";
+import { useSearchParams, useNavigate } from "react-router-dom";
+import { MdClose } from "react-icons/md";
 
 // const products = [
 //     { id: 1, name: "Straw Hat Tee", price: "$42", collection: "One Piece" },
@@ -19,10 +20,6 @@ const filters = {
     Category: ["Tops", "Bottoms", "Outerwear", "Accessories"],
 };
 
-const [searchParams] = useSearchParams();
-const navigate = useNavigate();
-const search = searchParams.get("search");
-
 export default function Products() {
     const [products, setProducts] = useState([]);
     const [loading, setLoading] = useState(true);
@@ -30,6 +27,8 @@ export default function Products() {
     const [selectedCollection, setSelectedCollection] = useState("All");
     const [selectedCategories, setSelectedCategories] = useState([]);
     const [searchParams, setSearchParams] = useSearchParams();
+    const navigate = useNavigate();
+    const search = searchParams.get("search");
 
     useEffect(() => {
         setLoading(true);
@@ -72,7 +71,16 @@ export default function Products() {
         <div className="prods-page">
 
             <div className="prods-header">
-                <h1 className="prods-title" href="/products">Products</h1>
+                <h1 className="prods-title">
+                    {search ? `Results for "${search}"` : "Products"}
+                </h1>
+
+                {search && (
+                    <button className="prods-reset" onClick={() => navigate("/products")}>
+                        Clear Search <MdClose />
+                    </button>
+
+                )}
 
             </div>
 

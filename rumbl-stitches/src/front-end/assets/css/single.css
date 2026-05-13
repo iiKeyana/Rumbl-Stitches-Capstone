@@ -67,6 +67,8 @@
     flex-direction: column;
     gap: 16px;
     padding-top: 8px;
+    max-width: 700px;
+    overflow-y: auto;
 }
 
 .prod-collection {
@@ -200,6 +202,14 @@
     padding: 4px 10px;
     border-radius: 20px;
     cursor: default;
+    transition: background 0.15s, color 0.15s;
+}
+
+.prod-tag:hover {
+    background: #6a4fa3;
+    color: white;
+    border-color: #6a4fa3;
+    cursor: pointer;
 }
 
 @media (max-width: 900px) {
