@@ -85,6 +85,17 @@ export default function SingleProduct() {
 
                     )}
 
+                    {product.tags && product.tags.length > 0 && (
+                        <div className="prod-tags">
+                            {product.tags.map((tag) => (
+                                <span key={tag} className="prod-tag">
+                                    {tag}
+                                </span>
+                                
+                            ))}
+                        </div>
+                    )}
+
                     <div className= "prod-sizes-wrap">
                         <p className= {`prod-sizes-label ${sizeError ? "error" : ""}`}>
                             {sizeError ? "Please select a size" : "Select Size"}
