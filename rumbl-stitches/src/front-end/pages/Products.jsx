@@ -19,6 +19,10 @@ const filters = {
     Category: ["Tops", "Bottoms", "Outerwear", "Accessories"],
 };
 
+const [searchParams] = useSearchParams();
+const navigate = useNavigate();
+const search = searchParams.get("search");
+
 export default function Products() {
     const [products, setProducts] = useState([]);
     const [loading, setLoading] = useState(true);
@@ -68,7 +72,7 @@ export default function Products() {
         <div className="prods-page">
 
             <div className="prods-header">
-                <h1 className="prods-title">Products</h1>
+                <h1 className="prods-title" href="/products">Products</h1>
 
             </div>
 
