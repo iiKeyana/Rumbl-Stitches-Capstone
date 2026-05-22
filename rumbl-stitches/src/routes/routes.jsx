@@ -10,6 +10,9 @@ import Checkout from "../front-end/pages/Checkout";
 import OnePiece from "../front-end/pages/OnePiece";
 import JJK from "../front-end/pages/Juju";
 import DemonSlayer from "../front-end/pages/DSlay";
+import Register from "../front-end/pages/Register";
+import Login from "../front-end/pages/Login";
+import OrderConf from "../front-end/pages/OrderConf";
 
 export default function AppRoutes() {
     return (
@@ -25,8 +28,13 @@ export default function AppRoutes() {
                 <Route path="collections/jujutsu-kaisen" element={<JJK />} />
                 <Route path="collections/demon-slayer" element={<DemonSlayer />} />
 
+                <Route path="register" element={<Register />} />
+                <Route path="login" element={<Login />} />
+
                 <Route path="cart" element={<Cart />} />
                 <Route path="checkout" element={<Checkout />} />
+
+                <Route path="order-confirmation/:id" element={<OrderConf />} />
 
             </Route>
 

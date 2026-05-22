@@ -2,44 +2,79 @@ import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 import "../assets/css/cart.css"
 
-// const placeholder = [
-//     { id: 1, name: "Straw Hat Tee", collection: "One Piece", price: 42, size: "M", qty: 1 },
-//     { id: 2, name: "Infinity Hoodie", collection: "Jujutsu Kaisen", price: 78, size: "L", qty: 2 },
-// ];
-
 export default function Cart() {
-    // const subtotal = placeholder.reduce((sum, item) => sum + item.price * item.qty, 0);
-
     const [cart, setCart] = useState([]);
+    const user = JSON.parse(localStorage.getItem("user") || "null");
+    const token = localStorage.getItem("token");
 
     useEffect(() => {
-        const stored = JSON.parse(localStorage.getItem("cart") || "[]");
-        setCart(stored);
+        if (user) {
+            fetch("/api/cart", {
+                headers: { Authorization: `Bearer ${token}` }
+            })
+                .then(res => res.json())
+                .then(data => setCart(data))
+                .catch(err => console.error(err));
+
+        } else {
+            const stored = JSON.parse(localStorage.getItem("cart") || "[]");
+
+            setCart(stored);
+        }
     }, []);
 
     const updateCart = (updated) => {
         setCart(updated);
-        localStorage.setItem("cart", JSON.stringify(updated));
+        if (!user) localStorage.setItem("cart", JSON.stringify(updated));
 
     };
 
-    const changeQty = (index, delta) => {
-        const updated = [...cart];
-        updated[index].quantity += delta;
+    const changeQty = async (index, delta) => {
+        const item = cart[index];
+        const newQty = item.quantity + delta;
 
-        if (updated[index].quantity <= 0) {
-            updated.splice(index, 1);
+        if (user) {
+            if (newQty <= 0) {
+                await fetch(`/api/cart/${item.id}`, {
+                    method: "DELETE",
+                    headers: { Authorization: `Bearer ${token}` }
+                });
 
+                updateCart(cart.filter((_, i) => i !== index));
+            } else {
+                await fetch(`/api/cart/${item.id}`, {
+                    method: "PATCH",
+                    headers: { Authorization: `Bearer ${token}`, "Content-Type": "application/json" },
+                    body: JSON.stringify({ quantity: newQty })
+                });
+
+                const updated = [...cart];
+
+                updated[index].quantity = newQty;
+
+                updateCart(updated);
+            }
+        } else {
+            const updated = [...cart];
+
+            updated[index].quantity = newQty;
+            if (newQty <= 0) updated.splice(index, 1);
+
+            updateCart(updated);
+        }
+    };
+
+    const removeItem = async (index) => {
+        const item = cart[index];
+
+        if (user) {
+            await fetch(`/api/cart/${item.id}`, {
+                method: "DELETE",
+                headers: { Authorization: `Bearer ${token}` }
+            });
         }
 
-        updateCart(updated);
-    };
-
-    const removeItem = (index) => {
-        const updated = [...cart];
-        updated.splice(index, 1);
-        
-        updateCart(updated);
+        updateCart(cart.filter((_, i) => i !== index));
     };
 
     const subtotal = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
@@ -65,7 +100,7 @@ export default function Cart() {
                     ) : (
 
                         cart.map((item, index) => (
-                            <div key= {index} className= "cart-item">
+                            <div key= {item.id ||index} className= "cart-item">
                                 <div className= "cart-item-image">
                                     {item.image
                                         ? <img src={item.image} alt={item.name} />
@@ -78,6 +113,7 @@ export default function Cart() {
                                     {item.collection && (
                                         <span className= "cart-item-collection">{item.collection}</span>
                                     )}
+
                                     <h3 className= "cart-item-name">{item.name}</h3>
                                     <span className= "cart-item-size">Size: {item.size}</span>
 
@@ -124,7 +160,7 @@ export default function Cart() {
 
                     <div className="summary-row summary-total">
                         <span>Total</span>
-                        <span>${subtotal === 0 ? "—" : subtotal >= 75 ? subtotal : subtotal + 8}</span>
+                        <span>${subtotal === 0 ? "—" : total}</span>
                     </div>
 
                     <Link to="/checkout"

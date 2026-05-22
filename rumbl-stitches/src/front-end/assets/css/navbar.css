@@ -55,6 +55,16 @@
     display: flex;
     align-items: center;
     gap: 4px;
+    font-size: 14px;
+}
+
+.nav-user {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.nav-right a.cart-icon {
     font-size: 24px;
 }
 
@@ -154,3 +164,29 @@
     width: 125%
 }
 
+.nav-logout {
+    position: relative;
+    background: none;
+    border: none;
+    font-size: 25px;
+    cursor: pointer;
+    color: black;
+    padding: 0;
+    height: 10px;
+    font-family: 'DM Sans', sans-serif;
+}
+
+.nav-logout::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -18px;
+    height: 2px;
+    width: 0%;
+    background: black;
+    transition: width 0.25s ease;
+}
+
+.nav-logout:hover::after {
+    width: 80%
+}
