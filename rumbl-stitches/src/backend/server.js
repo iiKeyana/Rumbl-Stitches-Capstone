@@ -116,9 +116,9 @@ app.post("/api/auth/register", async (req, res) => {
         );
 
         const user = result.rows[0];
-        const token = jwt.sign({ id: user.id, email: user.email }, process.env.JWT_SECRET, { expiresIn: "7d" });
+        const token = jwt.sign({ id: user.id, email: user.email, role: user.role }, process.env.JWT_SECRET, { expiresIn: "7d" });
 
-        res.status(201).json({ user, token });
+        res.status(201).json({ user: { ...user, role: user.role }, token });
     } catch (err) {
         res.status(500).json({ error: err.message });
     }
@@ -145,9 +145,9 @@ app.post("/api/auth/login", async (req, res) => {
             return res.status(401).json({ message: "Invalid email or password" });
         }
 
-        const token = jwt.sign({ id: user.id, email: user.email }, process.env.JWT_SECRET, { expiresIn: "7d" });
+        const token = jwt.sign({ id: user.id, email: user.email, role: user.role }, process.env.JWT_SECRET, { expiresIn: "7d" });
 
-        res.json({ user: { id: user.id, email: user.email, first_name: user.first_name, last_name: user.last_name }, token });
+        res.json({ user: { id: user.id, email: user.email, first_name: user.first_name, last_name: user.last_name, role: user.role }, token });
     } catch (err) {
         res.status(500).json({ error: err.message });
     }
@@ -155,14 +155,38 @@ app.post("/api/auth/login", async (req, res) => {
 
 const authMiddleware = (req, res, next) => {
     const token = req.headers.authorization?.split(" ")[1];
+
     if (!token) return res.status(401).json({ message: "Unauthorized" });
+
     try {
         req.user = jwt.verify(token, process.env.JWT_SECRET);
+
         next();
     } catch {
         res.status(401).json({ message: "Invalid token" });
     }
 };
+
+const adminMiddleware = (req, res, next) => {
+    const token = req.headers.authorization?.split(" ")[1];
+
+    if (!token) return res.status(401).json({ message: "Unauthorized" });
+
+    try {
+        const decoded = jwt.verify(token, process.env.JWT_SECRET);
+
+        if (decoded.role !== "admin") {
+            return res.status(403).json({ message: "Forbidden" });
+        }
+
+        req.user = decoded;
+        
+        next();
+    } catch {
+        res.status(401).json({ message: "Invalid token" });
+    }
+
+}
 
 //Get cart
 app.get("/api/cart", authMiddleware, async (req, res) => {
@@ -267,7 +291,7 @@ app.post("/api/orders", async (req, res) => {
     if (token) {
         try {
             const decoded = jwt.verify(token, process.env.JWT_SECRET);
-            
+
             user_id = decoded.id;
 
         } catch {}
@@ -278,7 +302,7 @@ app.post("/api/orders", async (req, res) => {
     const total = subtotal + shipping;
 
     try {
-        // save order to postgres
+        // Save order to postgres
         const orderResult = await pool.query(
             `INSERT INTO orders (user_id, status, subtotal, shipping, total, address, city, state, zip, country)
              VALUES ($1, 'pending', $2, $3, $4, $5, $6, $7, $8, $9) RETURNING *`,
@@ -288,7 +312,7 @@ app.post("/api/orders", async (req, res) => {
 
         const order = orderResult.rows[0];
 
-        // save order items to postgres
+        // Save order items to postgres
         await Promise.all(cart.map((item) =>
             pool.query(
                 `INSERT INTO order_items (order_id, product_id, name, price, size, quantity, image)
@@ -297,7 +321,7 @@ app.post("/api/orders", async (req, res) => {
             )
         ));
 
-        // Decreases stock in atlas
+        //Decreases stock in atlas
         await Promise.all(cart.map((item) =>
             Product.findByIdAndUpdate(
                 item.product_id || item._id,

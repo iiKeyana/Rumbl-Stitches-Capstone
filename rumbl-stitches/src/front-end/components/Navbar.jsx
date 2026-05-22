@@ -52,6 +52,7 @@ export default function Navbar() {
                     .then(data => {
                         const count = data.reduce((sum, item) => sum + item.quantity, 0);
                         setCartCount(count);
+
                     });
                     
             } else {
@@ -113,6 +114,7 @@ export default function Navbar() {
 
                 <Link to="/cart" className="cart-icon">
                     <MdShoppingCart />
+                    {cartCount > 0 && <span className="cart-count">{cartCount}</span>}
                 </Link>
 
                 {user ? (
