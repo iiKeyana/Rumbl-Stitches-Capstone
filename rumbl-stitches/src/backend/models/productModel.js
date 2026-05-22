@@ -9,6 +9,8 @@ const productSchema = new mongoose.Schema({
     category:    { type: String, default: "" },
     sizes:       { type: [String], default: ["S", "M", "L", "XL", "XXL"] },
     tags:        { type: [String], default: [] },
+    stock_by_size: { type: Map, of: Number, default: {} },
+    
 });
 
 export default mongoose.model("Product", productSchema);

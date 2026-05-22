@@ -29,7 +29,7 @@ export default function SingleProduct() {
 
     }, [id]);
 
-    const handleAddToCart = () => {
+    const handleAddToCart = async () => {
         if (!selectedSize) {
             setSizeError(true);
             setTimeout(() => setSizeError(false), 2000);
@@ -37,18 +37,43 @@ export default function SingleProduct() {
             return;
         }
 
-        const cart = JSON.parse(localStorage.getItem("cart") || "[]");
-        const existing = cart.find((i) => i._id === product._id && i.size === selectedSize);
+        const user = JSON.parse(localStorage.getItem("user") || "null");
+        const token = localStorage.getItem("token");
 
-        if (existing) {
-            existing.quantity += 1;
-
+        if (user) {
+            try {
+                await fetch("/api/cart", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                        Authorization: `Bearer ${token}`
+                    },
+                    body: JSON.stringify({
+                        product_id: product._id,
+                        name: product.name,
+                        price: product.price,
+                        size: selectedSize,
+                        quantity: 1,
+                        image: product.image || null,
+                        collection: product.collection || null
+                    })
+                });
+            } catch (err) {
+                console.error("Failed to add to cart", err);
+                return;
+            }
         } else {
-            cart.push({ ...product, size: selectedSize, quantity: 1 });
+            const cart = JSON.parse(localStorage.getItem("cart") || "[]");
+            const existing = cart.find((i) => i._id === product._id && i.size === selectedSize);
 
+            if (existing) {
+                existing.quantity += 1;
+            } else {
+                cart.push({ ...product, size: selectedSize, quantity: 1 });
+            }
+
+            localStorage.setItem("cart", JSON.stringify(cart));
         }
-
-        localStorage.setItem("cart", JSON.stringify(cart));
 
         setAdded(true);
         setTimeout(() => setAdded(false), 2000);
@@ -101,24 +126,27 @@ export default function SingleProduct() {
                             {sizeError ? "Please select a size" : "Select Size"}
                         </p>
 
-                        <div className= "prod-sizes">
+                        <div className="prod-sizes">
                             {(product.sizes || ["S", "M", "L", "XL", "XXL"]).map((size) => (
-                                <button className= {`prod-size-btn ${selectedSize === size ? "active" : ""}`}
+                                <button
+                                    className={`prod-size-btn ${selectedSize === size ? "active" : ""}`}
                                     key={size}
                                     onClick={() => setSelectedSize(size)}
                                 >
                                     {size}
-
                                 </button>
                             ))}
                             
                         </div>
                     </div>
 
-                    <button className= {`prod-add-btn ${added ? "added" : ""}`}
-                        onClick= {handleAddToCart}
+                    <button
+                        className={`prod-add-btn ${added ? "added" : ""} ${selectedSize && (product.stock_by_size?.[selectedSize] ?? 0) === 0 ? "out-of-stock" : ""}`}
+                        onClick={handleAddToCart}
+                        disabled={added || (selectedSize && (product.stock_by_size?.[selectedSize] ?? 0) === 0)}
                     >
-                        {added ? "Added to Cart ✓" : "Add to Cart"}
+                        {selectedSize && (product.stock_by_size?.[selectedSize] ?? 0) === 0 ? "Out of Stock" : added ? "Added to Cart ✓" : "Add to Cart"}
+
                     </button>
 
                 </div>
