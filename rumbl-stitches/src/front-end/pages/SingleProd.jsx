@@ -58,9 +58,6 @@ export default function SingleProduct() {
                         collection: product.collection || null
                     })
                 });
-
-                window.dispatchEvent(new Event("storage"));
-
             } catch (err) {
                 console.error("Failed to add to cart", err);
                 return;
@@ -76,8 +73,6 @@ export default function SingleProduct() {
             }
 
             localStorage.setItem("cart", JSON.stringify(cart));
-            window.dispatchEvent(new Event("storage"));
-            
         }
 
         setAdded(true);

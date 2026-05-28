@@ -27,8 +27,6 @@ export default function Cart() {
         setCart(updated);
         if (!user) localStorage.setItem("cart", JSON.stringify(updated));
 
-        window.dispatchEvent(new Event("storage"));
-
     };
 
     const changeQty = async (index, delta) => {
