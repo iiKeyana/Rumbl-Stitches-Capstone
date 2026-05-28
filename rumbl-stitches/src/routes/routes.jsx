@@ -13,6 +13,8 @@ import DemonSlayer from "../front-end/pages/DSlay";
 import Register from "../front-end/pages/Register";
 import Login from "../front-end/pages/Login";
 import OrderConf from "../front-end/pages/OrderConf";
+import Profile from "../front-end/pages/Profile";
+import Admin from "../front-end/pages/Admin";
 
 export default function AppRoutes() {
     return (
@@ -30,6 +32,8 @@ export default function AppRoutes() {
 
                 <Route path="register" element={<Register />} />
                 <Route path="login" element={<Login />} />
+                <Route path="profile" element={<Profile />} />
+                <Route path="admin" element={<Admin />} />
 
                 <Route path="cart" element={<Cart />} />
                 <Route path="checkout" element={<Checkout />} />
