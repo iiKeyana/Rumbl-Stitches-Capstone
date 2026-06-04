@@ -4,17 +4,6 @@ import "../assets/css/products.css";
 import { useSearchParams, useNavigate } from "react-router-dom";
 import { MdClose } from "react-icons/md";
 
-// const products = [
-//     { id: 1, name: "Straw Hat Tee", price: "$42", collection: "One Piece" },
-//     { id: 2, name: "Grand Line Hoodie", price: "$78", collection: "One Piece" },
-//     { id: 3, name: "Wanted Poster Tee", price: "$42", collection: "One Piece" },
-//     { id: 4, name: "Cursed Energy Tee", price: "$42", collection: "Jujutsu Kaisen" },
-//     { id: 5, name: "Gojo Fit Hoodie", price: "$78", collection: "Jujutsu Kaisen" },
-//     { id: 6, name: "Domain Expansion Tee", price: "$42", collection: "Jujutsu Kaisen" },
-//     { id: 7, name: "Breathing Form Tee", price: "$42", collection: "Demon Slayer" },
-//     { id: 8, name: "Tanjiro Hoodie", price: "$78", collection: "Demon Slayer" },
-// ];
-
 const filters = {
     Collections: ["All", "One Piece", "Jujutsu Kaisen", "Demon Slayer"],
     Category: ["Tops", "Bottoms", "Outerwear", "Accessories"],
@@ -56,16 +45,11 @@ export default function Products() {
     }, [selectedCollection, selectedCategories, searchParams]);
 
     const handleCategoryChange = (option) => {
-        setSelectedCategories((prev) => prev.includes(option)
-        ? prev.filter((c) => c !== option)
-        : [...prev, option]
-        );
+        setSelectedCategories((prev) => prev.includes(option) ? prev.filter((c) => c !== option) : [...prev, option]);
 
     };
 
-    const displayed = selectedCategories.length > 1
-    ? products.filter((p) => selectedCategories.includes(p.category))
-    : products;
+    const displayed = selectedCategories.length > 1 ? products.filter((p) => selectedCategories.includes(p.category)) : products;
 
     return (
         <div className="prods-page">
@@ -77,7 +61,7 @@ export default function Products() {
 
                 {search && (
                     <button className="prods-reset" onClick={() => navigate("/products")}>
-                        Clear Search <MdClose />
+                        Clear Search <MdClose/>
                     </button>
 
                 )}
@@ -102,6 +86,7 @@ export default function Products() {
                                         {f}
 
                                     </label>
+
                                 </li>
                             ))}
 
@@ -136,8 +121,8 @@ export default function Products() {
                 <main className="prods-grid-area">
                     {loading && <p className="prods-status">Loading...</p>}
                     {error && <p className="prods-status">{error}</p>}
-                    {!loading && !error && (
 
+                    {!loading && !error && (
                         <div className="prods-grid">
                             {displayed.map((p) => (
                                 <Link key={p._id} to={`/products/${p._id}`} className="product-card">
@@ -147,11 +132,13 @@ export default function Products() {
                                         }
                                         
                                     </div>
+
                                     <div className="product-info">
                                         <span className="product-name">{p.name}</span>
                                         <span className="product-price">${p.price}</span>
                                     
                                     </div>
+
                                 </Link>
                             ))}
                         

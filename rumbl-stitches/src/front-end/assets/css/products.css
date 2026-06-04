@@ -221,8 +221,14 @@
 }
 
 @media (max-width: 900px) {
-    .prods-header { padding: 28px 24px 20px; }
-    .prods-body { flex-direction: column; }
+    .prods-header {
+        padding: 28px 24px 20px;
+    }
+
+    .prods-body {
+        flex-direction: column;
+    }
+
     .sidebar {
         width: 100%;
         min-width: unset;
@@ -234,7 +240,14 @@
         
     }
 
-    .filter-list { flex-direction: row; flex-wrap: wrap; gap: 8px; }
-    .prods-grid { grid-template-columns: repeat(2, 1fr); }
-    .prods-grid-area { padding: 20px 24px; }
+    .filter-list {
+        flex-direction: row; flex-wrap: wrap; gap: 8px;
+    }
+
+    .prods-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    .prods-grid-area {
+        padding: 20px 24px;
+    }
 }
