@@ -11,11 +11,18 @@
 }
 
 .logo {
-    font-size: 20px;
-    font-weight: 700;
-    letter-spacing: 2px;
     text-decoration: none;
-    color: black;
+    display: flex;
+    align-items: center;
+    height: 150px;
+    overflow: hidden;
+    margin: -38px 0;
+}
+
+.logo-img {
+    height: 150px;
+    width: auto;
+    display: block;
 }
 
 .nav-links,
@@ -122,11 +129,11 @@
 
 .search-input {
     border: none;
-    border-bottom: 1.5px solid #0a0a0a;
+    border-bottom: 2px solid #0a0a0a;
     outline: none;
     font-size: 13px;
     font-family: 'DM Sans', sans-serif;
-    padding: 4px 0;
+    padding: 6.5px 0;
     width: 200px;
     background: transparent;
     color: #0a0a0a;
@@ -141,7 +148,7 @@
     background: none;
     border: none;
     cursor: pointer;
-    font-size: 16px;
+    font-size: 18px;
     color: #0a0a0a;
     display: flex;
     align-items: center;
@@ -153,7 +160,7 @@
     content: "";
     position: absolute;
     left: 0;
-    bottom: -6px;
+    bottom: -7px;
     height: 2px;
     width: 0%;
     background: black;
@@ -161,7 +168,7 @@
 }
 
 .search-btn:hover::after {
-    width: 125%
+    width: 135%
 }
 
 .nav-logout {
@@ -209,4 +216,17 @@
     align-items: center;
     justify-content: center;
     font-family: 'DM Sans', sans-serif;
+}
+
+.profile-icon svg{
+    position: relative;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 28px;
+    color: #0a0a0a;
+    display: flex;
+    align-items: center;
+    transition: opacity 0.2s;
+    
 }

@@ -74,6 +74,7 @@ export default function Cart() {
                 method: "DELETE",
                 headers: { Authorization: `Bearer ${token}` }
             });
+
         }
 
         updateCart(cart.filter((_, i) => i !== index));
@@ -98,6 +99,7 @@ export default function Cart() {
                         <div className= "cart-empty">
                             <p>Your cart is empty.</p>
                             <Link to= "/products" className= "btn btn-primary">Shop Now</Link>
+
                         </div>
                     ) : (
 
@@ -133,6 +135,7 @@ export default function Cart() {
 
                                     <button className= "cart-remove" onClick={() => removeItem(index)}>
                                         Remove
+
                                     </button>
 
                                 </div>
@@ -156,6 +159,7 @@ export default function Cart() {
                     <div className="summary-row">
                         <span>Shipping</span>
                         <span>{subtotal === 0 ? "—" : shipping === 0 ? "Free" : "$8"}</span>
+
                     </div>
 
                     <div className="summary-divider" />
@@ -163,6 +167,7 @@ export default function Cart() {
                     <div className="summary-row summary-total">
                         <span>Total</span>
                         <span>${subtotal === 0 ? "—" : total}</span>
+                        
                     </div>
 
                     <Link to="/checkout"
@@ -170,10 +175,12 @@ export default function Cart() {
                         onClick={(e) => cart.length === 0 && e.preventDefault()}
                     >
                         Checkout
+
                     </Link>
 
                     <Link to="/products" className="btn btn-ghost continue-btn">
                         Continue Shopping
+                        
                     </Link>
 
                 </div>
