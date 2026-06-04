@@ -1,9 +1,10 @@
 import { Link, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import "../assets/css/navbar.css";
-import { MdShoppingCart } from "react-icons/md";
+import { MdShoppingCart, MdPerson } from "react-icons/md";
 import { FaSearch } from "react-icons/fa";
 import { IoLogOut } from "react-icons/io5";
+import rumblLogo from "../assets/images/rumblLogo.svg";
 
 export default function Navbar() {
     const [searchOpen, setSearchOpen] = useState(false);
@@ -36,6 +37,7 @@ export default function Navbar() {
     localStorage.removeItem("token");
     localStorage.removeItem("user");
     setUser(null);
+
     navigate("/");
 
     };
@@ -44,7 +46,11 @@ export default function Navbar() {
 
     useEffect(() => {
         const getCount = () => {
-            if (user) {
+            const currentUser = JSON.parse(localStorage.getItem("user") || "null");
+
+            if (currentUser) {
+                const token = localStorage.getItem("token");
+                
                 fetch("/api/cart", {
                     headers: { Authorization: `Bearer ${token}` }
                 })
@@ -74,12 +80,13 @@ export default function Navbar() {
     return (
         <nav className="navbar">
             <Link to="/" className="logo">
-                RUMBL STITCHES
+                <img src={rumblLogo} className="logo-img" alt="Rumbl Stitches" />
             </Link>
 
             <div className="nav-links">
                 <div className="dropdown">
                     <Link to="/collections" className="dropdown-toggle">Collections</Link>
+                    
                     <ul className="dropdown-menu">
                         <li><Link to="/collections/one-piece">One Piece</Link></li>
                         <li><Link to="/collections/jujutsu-kaisen">Jujutsu Kaisen</Link></li>
@@ -107,7 +114,7 @@ export default function Navbar() {
                     </form>
 
                     <button className="search-btn" onClick={() => setSearchOpen((open) => !open)}>
-                        <FaSearch />
+                        <FaSearch/>
                     </button>
 
                 </div>
@@ -118,17 +125,11 @@ export default function Navbar() {
                 </Link>
 
                 {user ? (
-                        <>
-                            <span className="nav-user">Hi, {user.first_name}</span>
-
-                            <button className="nav-logout" onClick={handleLogout}>
-                                <IoLogOut />
-                            </button>
-                        </>
-
-                    ) : (
-                        <Link to="/login">Login</Link>
-
+                    <Link to="/profile" className="profile-icon">
+                        <MdPerson />
+                    </Link>
+                ) : (
+                    <Link to="/login">Login</Link>
                 )}
 
             </div>
