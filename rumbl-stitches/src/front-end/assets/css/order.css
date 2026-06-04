@@ -20,8 +20,8 @@
 }
 
 .conf-icon {
-    width: 64px;
-    height: 64px;
+    width: 56px;
+    height: 56px;
     border-radius: 50%;
     background: #f5f3ef;
     display: flex;
@@ -45,9 +45,19 @@
 }
 
 .conf-order-id {
-    font-size: 13px;
-    color: #aaa;
+    font-size: 12px;
+    color: #bbb;
     margin: 0;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+}
+
+.conf-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+    margin-top: 8px;
 }
 
 .conf-btn {
@@ -66,4 +76,128 @@
 
 .conf-btn:hover {
     background: #333;
+}
+
+.print-btn {
+    margin-top: 8px;
+    padding: 12px 32px;
+    background: white;
+    color: black;
+    font-size: 14px;
+    font-weight: 500;
+    text-decoration: none;
+    letter-spacing: 1px;
+    border: 1px solid #e5e5e5;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.print-btn:hover {
+    background: #f0f0f0;
+}
+
+@media print {
+    .print-btn, .navbar, .footer {
+        display: none;
+    }
+}
+
+@media print {
+    .print-btn, .no-print {
+        display: none;
+    }
+}
+
+.conf-details {
+    width: 100%;
+    margin-top: 8px;
+    border-top: 1px solid #f0f0f0;
+    padding-top: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    text-align: left;
+}
+
+.conf-address {
+    font-size: 13px;
+    color: #666;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.conf-items {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+}
+
+.conf-items thead tr {
+    border-bottom: 1px solid #e5e5e5;
+}
+
+.conf-items th {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    color: #aaa;
+    padding: 0 0 10px;
+    text-align: left;
+}
+
+.conf-items th:last-child,
+.conf-items td:last-child {
+    text-align: right;
+}
+
+.conf-items td {
+    padding: 10px 0;
+    color: #333;
+    border-bottom: 1px solid #f5f5f5;
+}
+
+.conf-items td:first-child {
+    font-weight: 500;
+}
+
+.conf-items tbody tr:last-child td {
+    border-bottom: none;
+}
+
+.conf-total-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 14px;
+    border-top: 1px solid #e5e5e5;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.conf-total-label {
+    color: #888;
+    font-weight: 400;
+    font-size: 13px;
+    padding-right: 4px;
+}
+
+.conf-info {
+    width: 100%;
+    margin: 16px 0 24px;
+    border-top: 1px solid #eee;
+
+}
+.conf-info-row {
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 8px 0;
+    border-bottom: 1px solid #eee;
+    font-size: 14px;
+}
+.conf-info-label {
+    color: #888;
+    flex-shrink: 0;
 }

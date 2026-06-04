@@ -17,24 +17,29 @@ export default function Register() {
 
         const nameRegex = /^[a-zA-Z]+$/;
         if (!nameRegex.test(form.first_name) || !nameRegex.test(form.last_name)) {
+
             return setError("Names can only contain letters");
         }
 
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         if (!emailRegex.test(form.email)) {
+
             return setError("Please enter a valid email address");
         }
 
         const passwordRegex = /^(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]).{8,}$/;
         if (!passwordRegex.test(form.password)) {
+
             return setError("Password must be at least 8 characters and include 1 uppercase letter, 1 number, and 1 special character");
         }
 
         if (form.password !== form.confirm) {
+
             return setError("Passwords do not match");
         }
 
         setLoading(true);
+
         try {
             const res = await fetch("/api/auth/register", {
                 method: "POST",
@@ -50,6 +55,7 @@ export default function Register() {
             });
 
             const data = await res.json();
+
             if (!res.ok) throw new Error(data.message);
 
             localStorage.setItem("token", data.token);
@@ -70,7 +76,7 @@ export default function Register() {
         <div className="auth-page">
             <div className="auth-card">
                 <h1 className="auth-title">Create Account</h1>
-                <p className="auth-sub">Join the Rumbl Stitches community</p>
+                <p className="auth-desc">Join the Rumbl Stitches community</p>
 
                 {error && <p className="auth-error">{error}</p>}
 

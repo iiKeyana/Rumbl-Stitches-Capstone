@@ -12,6 +12,7 @@ export default function Login() {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+
         setLoading(true);
         setError(null);
 
@@ -44,7 +45,7 @@ export default function Login() {
         <div className="auth-page">
             <div className="auth-card">
                 <h1 className="auth-title">Welcome Back</h1>
-                <p className="auth-sub">Sign in to your account</p>
+                <p className="auth-desc">Sign in to your account</p>
 
                 {error && <p className="auth-error">{error}</p>}
 
